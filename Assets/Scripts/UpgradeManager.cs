@@ -20,6 +20,7 @@ public class UpgradeManager : MonoBehaviour
         {
             upgradesLevels[upgrade.name] = 0; // Початковий рівень апгрейду
         }
+        LoadData();
     }
     public void UpgradeElement(Ability ability)
     {
@@ -29,6 +30,7 @@ public class UpgradeManager : MonoBehaviour
             OnUpgarade?.Invoke(ability.Projectile);
             upgrade?.Invoke();
             Debug.Log($"{ability.Name} upgraded to level {upgradesLevels[ability.Name]}");
+            SaveData();
         }
         else
         {
@@ -66,6 +68,26 @@ public class UpgradeManager : MonoBehaviour
                 totalDamage += GetUpgradeLevel(ability) * ability.Damage;
         }
         return totalDamage;
+    }
+
+    void SaveData()
+    {
+        for (int i = 0; i < upgradesLevels.Count; i++)
+        {
+
+        }
+        Dictionary<string, int> upgradesLevels = new Dictionary<string, int>();
+        upgradesLevels["PlayerLevel"] = 5;
+        upgradesLevels["Count"] = 100;
+
+        PlayerPrefsUtility.SaveDictionary(upgradesLevels, "GameData");
+    }
+
+    void LoadData()
+    {
+        Dictionary<string, int> upgradesLevels = PlayerPrefsUtility.LoadDictionary("GameData");
+        Debug.Log("PlayerLevel: " + upgradesLevels["PlayerLevel"]);
+        Debug.Log("Count: " + upgradesLevels["Count"]);
     }
 
 }

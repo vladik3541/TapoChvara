@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Bootstrap : MonoBehaviour
 {
+    [SerializeField] private SaveManager saveManager;
     [SerializeField] private GameStateManager gameStateManager;
     public UIAnimation uIAnimation;
     [SerializeField] private UIManager uiManager;
@@ -17,6 +18,7 @@ public class Bootstrap : MonoBehaviour
 
     private void Awake()
     {
+        saveManager.Initialize();
         uiManager.Initialize(uIAnimation, accumulatedDamage, damagePerClick);
         gameStateManager.Initialize();
         damagePerClick.Initialize(upgradeManager, gameStateManager, uiManager);

@@ -18,6 +18,8 @@ public class GoldManager : MonoBehaviour
     {
         instance = this;
         manager = FindObjectOfType<UIManager>();
+        if(PlayerPrefs.HasKey(SaveManager.KEY_GOLD))
+            gold = SaveManager.instance.GetSaveGold();
     }
 
     public bool RemoveGold(float value)
@@ -27,6 +29,7 @@ public class GoldManager : MonoBehaviour
             gold-=value;
 
             manager.UpdateGold(gold);
+            SetSaveGold();
             return true;
         }
         else
@@ -38,6 +41,11 @@ public class GoldManager : MonoBehaviour
     {
         gold += value;
         manager.UpdateGold(gold);
+        SetSaveGold();
         
+    }
+    private void SetSaveGold()
+    {
+        SaveManager.instance.SaveGold(Gold);
     }
 }

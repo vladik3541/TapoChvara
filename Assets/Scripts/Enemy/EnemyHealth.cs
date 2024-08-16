@@ -15,12 +15,14 @@ public class EnemyHealth : MonoBehaviour, IDamageable
         manager = FindObjectOfType<UIManager>();
         manager.InitSliderEnemyHealth(health);
         animator = GetComponent<Animator>();
+
     }
     public void TakeDamage(float amount)
     {
         if(health>0)
         {
             health -= amount;
+            SaveManager.instance.SaveEnemyCurrentHealth(health);
             manager.UpdateEnemyHealth(health);
         }
         else if (health <= 0)

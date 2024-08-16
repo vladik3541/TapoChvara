@@ -686,6 +686,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72814c746f3c2a7478c456e7e8ad899f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  saveManager: {fileID: 1690767731}
   gameStateManager: {fileID: 1690767730}
   uIAnimation: {fileID: 1333060411}
   uiManager: {fileID: 1333060412}
@@ -8572,6 +8573,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1690767729}
   - component: {fileID: 1690767730}
+  - component: {fileID: 1690767731}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -8610,6 +8612,18 @@ MonoBehaviour:
   enemyManager: {fileID: 0}
   uiManager: {fileID: 0}
   isGame: 0
+--- !u!114 &1690767731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1690767727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c503041473e6d3840af2f781e5964f97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1691890673
 GameObject:
   m_ObjectHideFlags: 0
