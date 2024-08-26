@@ -14,19 +14,20 @@ public class GameStateManager : MonoBehaviour
     [HideInInspector] public GroundManager groundManager;
     [HideInInspector] public SpawnEnemy enemyManager;
     [HideInInspector] public UIManager uiManager;
+    public Interstitial interstitial;
 
     public bool isGame;
     public void Initialize()
     {
         instance = this;
-
+        interstitial = FindObjectOfType<Interstitial>();
         enemyManager = FindObjectOfType<SpawnEnemy>();
         groundManager = FindObjectOfType<GroundManager>();
         uiManager = FindObjectOfType<UIManager>();
 
         stateMachine = new StateMachine();
 
-        newSpawnEnemyState = new NewSpawnEnemyState(this);
+        newSpawnEnemyState = new NewSpawnEnemyState(this, interstitial);
         gamePlayState = new GamePlayState(this);
         enemyDieState = new EnemyDieState(this);
 

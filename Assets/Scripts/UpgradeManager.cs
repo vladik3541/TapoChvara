@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,29 +7,47 @@ public class UpgradeManager : MonoBehaviour
     public event Action<GameObject> OnUpgarade;
     public static event Action upgrade;
     [SerializeField] private List<Ability> upgradesList;
-    private Dictionary<string, int> upgradesLevels;
+    private List<int> countUpgradeLevel;
     private int totalDamage;
+    private AbilittiCell[] abilittiCells;
 
     private void Start()
     {
-        upgradesLevels = new Dictionary<string, int>();
-
-        // Ініціалізація рівнів апгрейдів
-        foreach (Ability upgrade in upgradesList)
+        abilittiCells = FindObjectsOfType<AbilittiCell>();
+        countUpgradeLevel = new List<int>();
+        if(SaveManager.instance.GetAbilityList(out List<int> _list))
         {
-            upgradesLevels[upgrade.name] = 0; // Початковий рівень апгрейду
+            countUpgradeLevel = _list;
+            foreach(AbilittiCell cell in abilittiCells)
+            {
+                cell.UpdateTextUpgrade();
+            }
+            Debug.Log("Success");
         }
-        LoadData();
+        else
+        {
+            // Ініціалізація рівнів апгрейдів
+            for (int i = 0; i < upgradesList.Count; i++)
+            {
+                countUpgradeLevel.Add(0);
+            }
+        }
     }
     public void UpgradeElement(Ability ability)
     {
-        if (upgradesLevels.ContainsKey(ability.Name) && GoldManager.instance.RemoveGold(ability.Price))
+        if (GoldManager.instance.RemoveGold(ability.Price))
         {
-            upgradesLevels[ability.Name]++;
+            for (int i = 0; i < countUpgradeLevel.Count; i++)
+            {
+                if(ability.name == upgradesList[i].name)
+                {
+                    countUpgradeLevel[i]++;
+                }
+            }
+            SaveManager.instance.SaveAbility(countUpgradeLevel);
             OnUpgarade?.Invoke(ability.Projectile);
             upgrade?.Invoke();
-            Debug.Log($"{ability.Name} upgraded to level {upgradesLevels[ability.Name]}");
-            SaveData();
+            Debug.Log($"{ability.Name} upgraded to level");
         }
         else
         {
@@ -39,15 +56,15 @@ public class UpgradeManager : MonoBehaviour
     }
     public int GetUpgradeLevel(Ability ability)
     {
-        if (upgradesLevels.ContainsKey(ability.Name))
+        for (int i = 0; i < upgradesList.Count; i++)
         {
-            return upgradesLevels[ability.Name];
+            if (ability.name == upgradesList[i].name)
+            {
+                return countUpgradeLevel[i];
+            }
         }
-        else
-        {
-            Debug.LogWarning($"Upgrade {ability.Name} does not exist in the dictionary.");
-            return 0;
-        }
+        Debug.LogWarning($"Upgrade {ability.Name} does not exist in the dictionary.");
+        return 0;
     }
     public int GetAllDamagePerClick()
     {
@@ -69,25 +86,4 @@ public class UpgradeManager : MonoBehaviour
         }
         return totalDamage;
     }
-
-    void SaveData()
-    {
-        for (int i = 0; i < upgradesLevels.Count; i++)
-        {
-
-        }
-        Dictionary<string, int> upgradesLevels = new Dictionary<string, int>();
-        upgradesLevels["PlayerLevel"] = 5;
-        upgradesLevels["Count"] = 100;
-
-        PlayerPrefsUtility.SaveDictionary(upgradesLevels, "GameData");
-    }
-
-    void LoadData()
-    {
-        Dictionary<string, int> upgradesLevels = PlayerPrefsUtility.LoadDictionary("GameData");
-        Debug.Log("PlayerLevel: " + upgradesLevels["PlayerLevel"]);
-        Debug.Log("Count: " + upgradesLevels["Count"]);
-    }
-
 }

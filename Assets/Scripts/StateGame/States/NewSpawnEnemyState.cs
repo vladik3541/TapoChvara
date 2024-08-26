@@ -4,11 +4,16 @@ using DG.Tweening;
 public class NewSpawnEnemyState : State
 {
     private GameStateManager stateManager;
+    private Interstitial _interstitial;
     private float duration = 1;
 
-    public NewSpawnEnemyState(GameStateManager gameStateManager) 
+    private int coutFromAds = 0;
+    const int delayAds = 2;
+
+    public NewSpawnEnemyState(GameStateManager gameStateManager, Interstitial interstitial) 
     {
-        stateManager = gameStateManager;    
+        stateManager = gameStateManager;
+        _interstitial = interstitial;
     }
     public override void Enter()
     {
@@ -16,6 +21,12 @@ public class NewSpawnEnemyState : State
         GameObject enemy = stateManager.enemyManager.Spawn();
         stateManager.uiManager.UpdateLevel(stateManager.enemyManager.LevelEnemy);
         StartBehavior(enemy);
+        coutFromAds++;
+        if(coutFromAds>= 2)
+        {
+            coutFromAds = 0;
+            _interstitial.ShowAd();
+        }
     }
 
     public override void Exit()

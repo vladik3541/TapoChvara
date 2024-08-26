@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Playables;
 using UnityEngine;
 
 public class SaveManager : MonoBehaviour
@@ -39,6 +40,32 @@ public class SaveManager : MonoBehaviour
     public float GetCurrentHealth()
     {
         return PlayerPrefs.GetFloat(KEY_CURRENT_HEALTH);
+    }
+    public void SaveAbility(List<int> ability)
+    {
+        for (int i = 0; i < ability.Count; i++) 
+        {
+            PlayerPrefs.SetInt("Ability" + i, ability[i]);
+        }
+        PlayerPrefs.SetInt("CountAbility", ability.Count);
+        PlayerPrefs.Save();
+    }
+    public bool GetAbilityList(out List<int> abilityList)
+    {
+        if(PlayerPrefs.HasKey("CountAbility"))
+        {
+            int count = PlayerPrefs.GetInt("CountAbility");
+            List<int> list = new List<int>(count);
+            for (int i = 0; i < count; i++)
+            {
+                list.Add(PlayerPrefs.GetInt("Ability" + i));
+            }
+            abilityList = list;
+            return true;
+        }
+        abilityList = null;
+        return false;
+
     }
     
 }
