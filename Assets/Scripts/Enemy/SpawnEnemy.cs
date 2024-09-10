@@ -3,12 +3,13 @@ using UnityEngine;
 
 public class SpawnEnemy : MonoBehaviour
 {
+    public event Action OnEndAllEnemy;
     public event Action<int> OnChangeEnemy;
     [SerializeField] private GameObject[] enemys;
-    private int levelEnemy = 0;
-    public int LevelEnemy
+    private int enemyLevel = 0;
+    public int EnemyLevel
     {
-        get { return levelEnemy; }
+        get { return enemyLevel; }
     }
     private GameObject currenEnemy;
     public GameObject CurrentEnemy
@@ -25,18 +26,22 @@ public class SpawnEnemy : MonoBehaviour
             //health = SaveManager.instance.GetCurrentHealth();
         if (PlayerPrefs.HasKey(SaveManager.KEY_CURRENT_INDEX))
         {
-            levelEnemy = SaveManager.instance.GetCurrentIndex();
+            enemyLevel = SaveManager.instance.GetCurrentIndex();
             //Debug.LogError($"SaveIndexEnemy it {levelEnemy}");
         }
             
     }
     public GameObject Spawn()
     {
-        if (levelEnemy >= enemys.Length) return null;
-        currenEnemy = Instantiate(enemys[levelEnemy],new Vector3(10, 20,0), Quaternion.identity);
-        OnChangeEnemy?.Invoke(levelEnemy);
-        SaveManager.instance.SaveEnemyCurrentIndex(levelEnemy);
-        levelEnemy++;
+        if (enemyLevel >= enemys.Length)
+        {
+            OnEndAllEnemy?.Invoke();
+            return null;
+        }
+        currenEnemy = Instantiate(enemys[enemyLevel],new Vector3(10, 20,0), Quaternion.identity);
+        OnChangeEnemy?.Invoke(enemyLevel);
+        SaveManager.instance.SaveEnemyCurrentIndex(enemyLevel);
+        enemyLevel++;
         return currenEnemy;
     }
 }

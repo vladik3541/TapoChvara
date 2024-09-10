@@ -1,13 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameStateManager : MonoBehaviour
 {
     public static GameStateManager instance;
 
+    [SerializeField] private GameObject effectsGameOver;
+    [SerializeField] private GameObject panelWin;
+
     [HideInInspector] public StateMachine stateMachine;
-    [HideInInspector] public NewSpawnEnemyState newSpawnEnemyState;
+    [HideInInspector] public SpawnEnemyState newSpawnEnemyState;
     [HideInInspector] public GamePlayState gamePlayState;
     [HideInInspector] public EnemyDieState enemyDieState;
 
@@ -27,11 +32,12 @@ public class GameStateManager : MonoBehaviour
 
         stateMachine = new StateMachine();
 
-        newSpawnEnemyState = new NewSpawnEnemyState(this, interstitial);
+        newSpawnEnemyState = new SpawnEnemyState(this, interstitial);
         gamePlayState = new GamePlayState(this);
         enemyDieState = new EnemyDieState(this);
 
         stateMachine.InitializeState(newSpawnEnemyState);
+        enemyManager.OnEndAllEnemy += GameOver;
     }
     private void OnEnable()
     {
@@ -56,5 +62,15 @@ public class GameStateManager : MonoBehaviour
     private void SpawnNewEnemy() 
     {
         stateMachine.SwitchState(newSpawnEnemyState);
+    }
+    private void GameOver()
+    {
+        panelWin.SetActive(true);
+        Instantiate(effectsGameOver);
+    }
+    public void NewGame()
+    {
+        PlayerPrefs.DeleteAll();
+        SceneManager.LoadScene(0);
     }
 }

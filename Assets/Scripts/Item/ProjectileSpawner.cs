@@ -5,7 +5,7 @@ using UnityEngine;
 public class ProjectileSpawner : MonoBehaviour
 {
     [SerializeField] private Transform[] LeftPoint,RightPoint;
-    private List<GameObject> projectile;
+    List<GameObject> projectile;
     private UpgradeManager upgradeManager;
 
     private void Awake()

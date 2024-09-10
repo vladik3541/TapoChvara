@@ -7,11 +7,14 @@ public class EnemyHealth : MonoBehaviour, IDamageable
 {
     public static event Action OnDeath;
     public float health = 100;
+    private float maxHealth;
     private Animator animator;
     private UIManager manager;
     private bool isDie = false;
+    private float regenerationPercent = 1.5f;
     private void Start()
     {
+        maxHealth = health;
         manager = FindObjectOfType<UIManager>();
         manager.InitSliderEnemyHealth(health);
         animator = GetComponent<Animator>();
@@ -41,5 +44,18 @@ public class EnemyHealth : MonoBehaviour, IDamageable
         yield return new WaitForSeconds(1.5f);
         OnDeath?.Invoke();
         Destroy(gameObject,5);
+    }
+
+    private void Update()
+    {
+        Regeneration();
+    }
+
+    private void Regeneration()
+    {
+        if (maxHealth > health && health > 0)
+        {
+            health += Time.deltaTime * regenerationPercent;
+        }
     }
 }
