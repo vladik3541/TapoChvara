@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class DamagePerClick : MonoBehaviour
@@ -7,11 +8,14 @@ public class DamagePerClick : MonoBehaviour
     public event Action NoActiveDoubleDamage;
     public static event Action<Vector3> OnClickHit;
 
+    [SerializeField] private GameObject textDoubleDamage;
+
     [SerializeField] private float DamageMultiplierThreshold = 8f;
 
     private UpgradeManager _upgradeManager;
     private GameStateManager _gameStateManager;
     private UIManager _uiManager;
+
 
     private float damageMultiplier = 1;
     const float defaultClicksPerAction = 1;
@@ -21,16 +25,20 @@ public class DamagePerClick : MonoBehaviour
         _gameStateManager = gameStateManager;
         _uiManager = uIManager;
         _uiManager.UpdateDamagePerClick(defaultClicksPerAction);
+        textDoubleDamage.SetActive(false);
+        RewardedAdsButton.OnCompleteAdsWatch += Active_Double_Damage;
     }
     private void OnEnable()
     {
         InputManager.OnClick += Click;
+        
     }
     private void OnDisable()
     {
-        InputManager.OnClick -= Click; 
+        InputManager.OnClick -= Click;
+        RewardedAdsButton.OnCompleteAdsWatch -= Active_Double_Damage;
     }
-    public void OnClicksAccumulated(float accumulatedClicks)
+/*    public void OnClicksAccumulated(float accumulatedClicks)
     {
         if (accumulatedClicks >= DamageMultiplierThreshold)
         {
@@ -42,7 +50,7 @@ public class DamagePerClick : MonoBehaviour
             NoActiveDoubleDamage?.Invoke();
             damageMultiplier = 1;
         }
-    }
+    }*/
     private void Click(Vector3 pos)
     {
         if (!_gameStateManager.isGame) return;
@@ -66,7 +74,18 @@ public class DamagePerClick : MonoBehaviour
             }
         }
     }    
-
+    private void Active_Double_Damage()
+    {
+        StartCoroutine(GoDoubleDamage());
+    }
+    IEnumerator GoDoubleDamage()
+    {
+        damageMultiplier = 2;
+        textDoubleDamage.SetActive(true);
+        yield return new WaitForSeconds(10);
+        textDoubleDamage.SetActive(false);
+        damageMultiplier = 1;
+    }
     public float GetDamage()
     {
         return (_upgradeManager.GetAllDamagePerClick() + defaultClicksPerAction) * damageMultiplier;

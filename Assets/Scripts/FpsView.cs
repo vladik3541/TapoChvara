@@ -18,4 +18,26 @@ public class FpsView : MonoBehaviour
         float fps = 1.0f / deltaTime;
         fpsText.text = string.Format("{0:0.} FPS", fps);
     }
+    public void SetQuality(int qualityIndex)
+    {
+        QualitySettings.SetQualityLevel(qualityIndex);
+    }
+    public void SetFpsWidth(int index)
+    {
+        switch(index)
+        {
+            case 0:
+                Application.targetFrameRate = 30;
+                break;
+            case 1:
+                Application.targetFrameRate = 60;
+                break;
+            case 2:
+                Application.targetFrameRate = 90;
+                break;
+            case 3:
+                Application.targetFrameRate = 120;
+                break;
+        }
+    }
 }

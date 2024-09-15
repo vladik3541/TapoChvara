@@ -34,6 +34,10 @@ public class GroundManager : MonoBehaviour
         spawnEnemy = FindObjectOfType<SpawnEnemy>();
         spawnEnemy.OnChangeEnemy += ChangeLevelPlace;
         listGround = new List<GameObject>();
+        if (PlayerPrefs.HasKey("GroundLevel"))
+        {
+            _level = PlayerPrefs.GetInt("GroundLevel");
+        }
         poolGround.CreateInitialPool(_ground[_level]);
         StartSpawm();
     }
@@ -97,7 +101,8 @@ public class GroundManager : MonoBehaviour
             listGround.Clear();
             StartSpawm();
         }
-
+        PlayerPrefs.SetInt("GroundLevel", _level);
+        PlayerPrefs.Save();
     }
     private void OnDisable()
     {

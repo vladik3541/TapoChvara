@@ -15,7 +15,7 @@ MonoBehaviour:
   _sprite: {fileID: 21300000, guid: e32b8056f5f2eb741bec42f791c7f1b5, type: 3}
   _Name: Fireball
   _Description: Damage per click 125
-  price: 2000
+  price: 8000
   projectile: {fileID: 8854351495143987298, guid: 34932c83d2c0ac14ab168d6cde014576,
     type: 3}
   isDamagePerSeconde: 0

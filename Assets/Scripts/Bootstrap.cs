@@ -11,7 +11,7 @@ public class Bootstrap : MonoBehaviour
     [SerializeField] private UIManager uiManager;
     [SerializeField] private DamagePerClick damagePerClick;
     [SerializeField] private DamagePerSeconds damagePerSeconds;
-    [SerializeField] private AccumulatedDamage accumulatedDamage;
+    //[SerializeField] private AccumulatedDamage accumulatedDamage;
     [SerializeField] private GoldManager goldManager;
     [SerializeField] private UpgradeManager upgradeManager;
     [SerializeField] private EffectClickManager effectClickManager;
@@ -20,12 +20,12 @@ public class Bootstrap : MonoBehaviour
     private void Awake()
     {
         saveManager.Initialize();
-        uiManager.Initialize(uIAnimation, accumulatedDamage, damagePerClick);
+        uiManager.Initialize(uIAnimation, damagePerClick);
         spawnEnemy.Initialize();
         gameStateManager.Initialize();
         damagePerClick.Initialize(upgradeManager, gameStateManager, uiManager);
         damagePerSeconds.Initialize();
-        accumulatedDamage.Initialize();
+        //accumulatedDamage.Initialize();
         goldManager.Initialize();
         effectClickManager.Initialize(damagePerClick);
         

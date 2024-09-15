@@ -61,7 +61,7 @@ public class AccumulatedDamage : MonoBehaviour
     }
     private void NotifyObservers()
     {
-        observers.OnClicksAccumulated(accumulatedClicks);
+        //observers.OnClicksAccumulated(accumulatedClicks);
     }
     private void CheckActive()
     {

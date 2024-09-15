@@ -20,28 +20,28 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Button buttonShop;
     
     private UIAnimation _uiAnimation;
-    private AccumulatedDamage _accumulatedDamage;
+    //private AccumulatedDamage _accumulatedDamage;
     private DamagePerClick _damagePerClick;
     private bool activeUpgradePanel = false;
-    public void Initialize(UIAnimation uIAnimation, AccumulatedDamage accumulatedDamage, DamagePerClick damagePerClick)
+    public void Initialize(UIAnimation uIAnimation, DamagePerClick damagePerClick)
     {
         _uiAnimation = uIAnimation;
-        _accumulatedDamage = accumulatedDamage;
+        //_accumulatedDamage = accumulatedDamage;
         _damagePerClick = damagePerClick;
 
-        _accumulatedDamage.ActiveSlider += EnableSlider;
-        _accumulatedDamage.NoActiveSlider += DisableSlider;
-        _damagePerClick.ActiveDoubleDamage += ShakeAndEnableTextDoubleDamage;
-        _damagePerClick.NoActiveDoubleDamage += DisableTextDoubledamage;
+        //_accumulatedDamage.ActiveSlider += EnableSlider;
+        //_accumulatedDamage.NoActiveSlider += DisableSlider;
+        //_damagePerClick.ActiveDoubleDamage += ShakeAndEnableTextDoubleDamage;
+        //_damagePerClick.NoActiveDoubleDamage += DisableTextDoubledamage;
 
         UpdateGold(0);
     }
     private void OnDisable()
     {
-        _accumulatedDamage.ActiveSlider -= EnableSlider;
-        _accumulatedDamage.NoActiveSlider -= DisableSlider;
-        _damagePerClick.ActiveDoubleDamage -= ShakeAndEnableTextDoubleDamage;
-        _damagePerClick.NoActiveDoubleDamage -= DisableTextDoubledamage;
+        //_accumulatedDamage.ActiveSlider -= EnableSlider;
+        //_accumulatedDamage.NoActiveSlider -= DisableSlider;
+        //_damagePerClick.ActiveDoubleDamage -= ShakeAndEnableTextDoubleDamage;
+        //_damagePerClick.NoActiveDoubleDamage -= DisableTextDoubledamage;
     }
     public void InitSliderEnemyHealth(float value)
     {
@@ -88,15 +88,15 @@ public class UIManager : MonoBehaviour
     {
         LevelInfo.text = "Level " + level.ToString("F0");
     }
-    public void EnableSlider()
+   /* public void EnableSlider()
     {
         _uiAnimation.EnableSlider(sliderDoubleDamage.GetComponent<RectTransform>());
     }
     public void DisableSlider()
     {
         _uiAnimation.DisableSlider(sliderDoubleDamage.GetComponent<RectTransform>());
-    }
-    public void ShakeAndEnableTextDoubleDamage()
+    }*/
+   /* public void ShakeAndEnableTextDoubleDamage()
     {
         textDoubleDamage.gameObject.SetActive(true);
         _uiAnimation.TextDoubleDamageAnimation(textDoubleDamage.GetComponent<RectTransform>());
@@ -104,5 +104,5 @@ public class UIManager : MonoBehaviour
     public void DisableTextDoubledamage()
     {
         textDoubleDamage.gameObject.SetActive(false);
-    }
+    }*/
 }
