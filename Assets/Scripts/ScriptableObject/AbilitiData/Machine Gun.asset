@@ -15,7 +15,7 @@ MonoBehaviour:
   _sprite: {fileID: 21300000, guid: a893af5c92e73d24bbea12aeb87df664, type: 3}
   _Name: Machine Gun
   _Description: Damage per click 250
-  price: 5000
+  price: 60000
   projectile: {fileID: 1329457713722491620, guid: 8e695ba7edf8f724ca272d0c28275498,
     type: 3}
   isDamagePerSeconde: 0

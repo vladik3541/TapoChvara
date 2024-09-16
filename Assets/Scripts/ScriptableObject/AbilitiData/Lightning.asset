@@ -15,7 +15,7 @@ MonoBehaviour:
   _sprite: {fileID: 21300000, guid: ed8ef41e0593c444f89985400bb18768, type: 3}
   _Name: Lightning
   _Description: Damage per click 1500
-  price: 50000
+  price: 500000
   projectile: {fileID: 4176992476001929114, guid: cdd3193ed4578e94bb30f5e49c592d3e,
     type: 3}
   isDamagePerSeconde: 0

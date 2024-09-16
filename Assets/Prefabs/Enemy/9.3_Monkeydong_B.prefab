@@ -291,6 +291,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 5e+11
+  regenerationPercent: 2
 --- !u!136 &3941984741331715712
 CapsuleCollider:
   m_ObjectHideFlags: 0

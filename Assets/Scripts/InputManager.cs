@@ -23,7 +23,7 @@ public class InputManager : MonoBehaviour
         }
 
         // Перевірка торкань сенсорного екрану
-        if (Input.touchCount > 0)
+        if (Input.touchCount > 0 && Input.touchCount <= 3)
         {
             for (int i = 0; i < Input.touchCount; i++)
             {

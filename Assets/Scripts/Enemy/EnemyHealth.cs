@@ -11,7 +11,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     private Animator animator;
     private UIManager manager;
     private bool isDie = false;
-    private float regenerationPercent = 1.5f;
+    [SerializeField] private float regenerationPercent = 1.5f;
     private void Start()
     {
         maxHealth = health;

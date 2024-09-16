@@ -813,6 +813,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 30000000
+  regenerationPercent: 1.7
 --- !u!136 &9090673281873860371
 CapsuleCollider:
   m_ObjectHideFlags: 0

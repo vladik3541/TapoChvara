@@ -15,7 +15,7 @@ MonoBehaviour:
   _sprite: {fileID: 21300000, guid: e5da668c6557abb47a17a303cf69943f, type: 3}
   _Name: Curse
   _Description: Damage per second 500
-  price: 10000
+  price: 100000
   projectile: {fileID: 0}
   isDamagePerSeconde: 1
-  damage: 500
+  damage: 450

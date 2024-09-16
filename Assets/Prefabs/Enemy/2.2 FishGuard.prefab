@@ -831,6 +831,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 20000
+  regenerationPercent: 1.7
 --- !u!95 &1972218558724874429
 Animator:
   serializedVersion: 5

@@ -15,7 +15,7 @@ MonoBehaviour:
   _sprite: {fileID: 21300000, guid: afcc21aaa520e9743b7c6ddd2ee73409, type: 3}
   _Name: Phoenix
   _Description: Damage per second 10000
-  price: 400000
+  price: 4000000
   projectile: {fileID: 0}
   isDamagePerSeconde: 1
   damage: 10000

@@ -1044,6 +1044,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 1000
+  regenerationPercent: 1.7
 --- !u!82 &1206090954392581684
 AudioSource:
   m_ObjectHideFlags: 0
