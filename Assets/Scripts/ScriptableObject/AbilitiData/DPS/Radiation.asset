@@ -18,4 +18,4 @@ MonoBehaviour:
   price: 50000000
   projectile: {fileID: 0}
   isDamagePerSeconde: 1
-  damage: 40000
+  damage: 30000

@@ -12,12 +12,14 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     private UIManager manager;
     private bool isDie = false;
     [SerializeField] private float regenerationPercent = 1.5f;
+    private float regeneration;
     private void Start()
     {
         maxHealth = health;
         manager = FindObjectOfType<UIManager>();
         manager.InitSliderEnemyHealth(health);
         animator = GetComponent<Animator>();
+        regeneration = (health / 100) * regenerationPercent;
 
     }
     public void TakeDamage(float amount)
@@ -55,7 +57,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     {
         if (maxHealth > health && health > 0)
         {
-            health += Time.deltaTime * regenerationPercent;
+            health += Time.deltaTime * regeneration;
         }
     }
 }

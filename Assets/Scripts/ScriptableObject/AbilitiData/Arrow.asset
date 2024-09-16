@@ -15,7 +15,7 @@ MonoBehaviour:
   _sprite: {fileID: 21300000, guid: c5c867e9976dc5d4a8803e01578752f5, type: 3}
   _Name: Arrow
   _Description: Damage per click 1
-  price: 50
+  price: 75
   projectile: {fileID: 4573974636379175448, guid: 5622e9289d52a0c47b91d0d5fabb8dc9,
     type: 3}
   isDamagePerSeconde: 0
