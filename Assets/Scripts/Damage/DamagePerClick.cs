@@ -18,7 +18,7 @@ public class DamagePerClick : MonoBehaviour
 
 
     private float damageMultiplier = 1;
-    const float defaultClicksPerAction = 1;
+    [SerializeField]private float defaultClicksPerAction = 1;
     public void Initialize(UpgradeManager upgradeManager, GameStateManager gameStateManager, UIManager uIManager)
     {
         _upgradeManager = upgradeManager;

@@ -26,22 +26,8 @@ public class UIManager : MonoBehaviour
     public void Initialize(UIAnimation uIAnimation, DamagePerClick damagePerClick)
     {
         _uiAnimation = uIAnimation;
-        //_accumulatedDamage = accumulatedDamage;
         _damagePerClick = damagePerClick;
-
-        //_accumulatedDamage.ActiveSlider += EnableSlider;
-        //_accumulatedDamage.NoActiveSlider += DisableSlider;
-        //_damagePerClick.ActiveDoubleDamage += ShakeAndEnableTextDoubleDamage;
-        //_damagePerClick.NoActiveDoubleDamage += DisableTextDoubledamage;
-
         UpdateGold(0);
-    }
-    private void OnDisable()
-    {
-        //_accumulatedDamage.ActiveSlider -= EnableSlider;
-        //_accumulatedDamage.NoActiveSlider -= DisableSlider;
-        //_damagePerClick.ActiveDoubleDamage -= ShakeAndEnableTextDoubleDamage;
-        //_damagePerClick.NoActiveDoubleDamage -= DisableTextDoubledamage;
     }
     public void InitSliderEnemyHealth(float value)
     {
@@ -69,7 +55,7 @@ public class UIManager : MonoBehaviour
     }
     public void UpdateDamagePerClick(float value)
     {
-        textDamagePerClick.text = value.ToString() + "+";
+        textDamagePerClick.text = value.ToString("N0") + "+";
     }
     public void SwitchUpgradePanel()
     {
@@ -88,21 +74,4 @@ public class UIManager : MonoBehaviour
     {
         LevelInfo.text = "Level " + level.ToString("F0");
     }
-   /* public void EnableSlider()
-    {
-        _uiAnimation.EnableSlider(sliderDoubleDamage.GetComponent<RectTransform>());
-    }
-    public void DisableSlider()
-    {
-        _uiAnimation.DisableSlider(sliderDoubleDamage.GetComponent<RectTransform>());
-    }*/
-   /* public void ShakeAndEnableTextDoubleDamage()
-    {
-        textDoubleDamage.gameObject.SetActive(true);
-        _uiAnimation.TextDoubleDamageAnimation(textDoubleDamage.GetComponent<RectTransform>());
-    }
-    public void DisableTextDoubledamage()
-    {
-        textDoubleDamage.gameObject.SetActive(false);
-    }*/
 }

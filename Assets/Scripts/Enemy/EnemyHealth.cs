@@ -27,14 +27,16 @@ public class EnemyHealth : MonoBehaviour, IDamageable
         if(health>0)
         {
             health -= amount;
+            if(health < 0)
+                health = 0;
             SaveManager.instance.SaveEnemyCurrentHealth(health);
             manager.UpdateEnemyHealth(health);
         }
         else if (health <= 0)
         {
             if (isDie) return;
-            isDie = true;
             health = 0;
+            isDie = true;
             StartCoroutine(Death());
         }
     }
