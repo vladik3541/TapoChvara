@@ -9,10 +9,10 @@ public class AbilittiCell : MonoBehaviour
 {
     [SerializeField] private Ability ability;
     [SerializeField] private TextMeshProUGUI textName;
-    [SerializeField] private Image icon;
     [SerializeField] private TextMeshProUGUI textPrice;
     [SerializeField] private TextMeshProUGUI textCountUpgrade;
     [SerializeField] private TextMeshProUGUI textDescription;
+    [SerializeField] private Color32 lockButton, unlockButton;
 
     private UpgradeManager upgradeManager;
     private Image currentButtonImage;
@@ -22,7 +22,7 @@ public class AbilittiCell : MonoBehaviour
         upgradeManager = FindObjectOfType<UpgradeManager>();
         currentButtonImage = GetComponent<Image>();
         textName.text = ability.Name;
-        icon.sprite = ability.Sprite;
+        
         textPrice.text = ability.Price.ToString("N0") + "$";
         textCountUpgrade.text = "0";
         textDescription.text = ability.Description;
@@ -40,11 +40,11 @@ public class AbilittiCell : MonoBehaviour
         {
             if (GoldManager.instance.Gold < ability.Price)
             {
-                currentButtonImage.color = Color.gray;
+                currentButtonImage.color = lockButton;
             }
             else
             {
-                currentButtonImage.color = Color.white;
+                currentButtonImage.color = unlockButton;
             }
             yield return new WaitForSeconds(timeDelayCheck);
         }

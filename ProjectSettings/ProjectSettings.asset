@@ -920,7 +920,13 @@ PlayerSettings:
   XboxOneOverrideIdentityName: 
   XboxOneOverrideIdentityPublisher: 
   vrEditorSettings: {}
-  cloudServicesEnabled: {}
+  cloudServicesEnabled:
+    Build: 0
+    Game Performance: 0
+    Legacy Analytics: 0
+    Purchasing: 0
+    UDP: 0
+    Unity Ads: 0
   luminIcon:
     m_Name: 
     m_ModelFolderPath: 
@@ -940,10 +946,10 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 0
   windowsGamepadBackendHint: 0
-  cloudProjectId: 8bff4c4f-c277-4b54-90ea-cf165290b7f4
+  cloudProjectId: 3f414acf-b052-47ec-a739-c155ea2c3b64
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: Cklicker
+  projectName: TapoChvara (1)
   organizationId: nick_lp
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0

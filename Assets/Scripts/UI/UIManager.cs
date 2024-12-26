@@ -55,7 +55,7 @@ public class UIManager : MonoBehaviour
     }
     public void UpdateDamagePerClick(float value)
     {
-        textDamagePerClick.text = value.ToString("N0") + "+";
+        textDamagePerClick.text = "Damage per click" + value.ToString("N0") + "+";
     }
     public void SwitchUpgradePanel()
     {

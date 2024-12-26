@@ -14,7 +14,7 @@ public class GroundManager : MonoBehaviour
     const int levelGround = 1, levelSand = 2;
 
     private PoolGround poolGround;
-    private List<GameObject> listGround;
+    private Transform lastGround;
     private const int GROUND_COUNT = 5;
     private float currentSpeed;
 
@@ -33,7 +33,6 @@ public class GroundManager : MonoBehaviour
         poolGround = GetComponent<PoolGround>();
         spawnEnemy = FindObjectOfType<SpawnEnemy>();
         spawnEnemy.OnChangeEnemy += ChangeLevelPlace;
-        listGround = new List<GameObject>();
         if (PlayerPrefs.HasKey("GroundLevel"))
         {
             _level = PlayerPrefs.GetInt("GroundLevel");
@@ -65,40 +64,38 @@ public class GroundManager : MonoBehaviour
         GameObject ground = poolGround.GetObjectFromPool();
         ground.transform.parent = transform;
         Vector3 pointSpawn = Vector3.zero;
-        if (!listGround.Any())
+        if (lastGround==null)
         {
             pointSpawn.z = 0;
         }
         else
         {
-            pointSpawn.z = listGround[listGround.Count - 1].transform.position.z + distanceBetween;
+            pointSpawn.z = lastGround.position.z + distanceBetween;
         }
         ground.transform.position = pointSpawn;
 
-        listGround.Add(ground);
+        lastGround = ground.transform;
     }
     public void Remove(GameObject ground)
     {
         Spawn();
-        ground.transform.position = Vector3.zero;//new 
-        listGround.Remove(ground);
+        ground.transform.position = Vector3.zero;
         poolGround.ReturnObjectToPool(ground);
     }
     private void ChangeLevelPlace(int level)
     {
 
+        lastGround = null;
         if (level == levelForSwitchGround)
         {
             _level = levelGround;
             poolGround.RecreatePool(_ground[_level]);
-            listGround.Clear();
             StartSpawm();
         }
         else if (level == levelForSwitchSand)
         {
             _level = levelSand;
             poolGround.RecreatePool(_ground[_level]);
-            listGround.Clear();
             StartSpawm();
         }
         PlayerPrefs.SetInt("GroundLevel", _level);

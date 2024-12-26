@@ -1035,7 +1035,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef3e4d82f20f2b2478bffe6ac3e22a52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 2.5e+11
+  health: 1e+11
   regenerationPercent: 1.7
 --- !u!136 &4666844297383385184
 CapsuleCollider:
